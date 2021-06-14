@@ -70,15 +70,28 @@ Linux 的動態連結函式庫 (Shared object)
 ## FHS
 檔案系統階層標準 (Filesystem Hierarchy Standard)，定義 Linux 作業系統中的主要目錄及目錄內容。
 
+## Linux 三大分支
+* 三大分支，有些再進行二次分支。
+1. Debian (沒有商業公司支持，但最自由): 
+    * ubuntu
+    * knopix (資安著稱)
+    * mint (圖形介面著稱)
+2. Slackware:
+    * S.u.S.E.
+3. Redhat: 
+    * Redhat 9.0: 
+        * RHEL (Redhat Enterprise Linux)
+        * CentOS (Community ENTerprise OS，RHEL 社群版)
+        * Fedora Core (每6個月更新)
 
 <br/>
 
 <br/>
 
 # 基本原則
-1. 複雜的任務，都是由小程序組合而成。
+1. 複雜任務，都是由小程序組合而成，一個程序只做一件事。
 2. 一切皆文件。
-3. 盡量避免捕獲用戶接口 (避免和用戶交互)。
+3. 盡量避免跟用戶交互。
 4. 配置文件為文本格式。
 5. CLI:  
     * 命令提示符 (prompt) 分為
@@ -120,47 +133,6 @@ Linux 的動態連結函式庫 (Shared object)
 
 <br/>
 
-# 文件類型
-輸入 <code>ls -l</code> 
-```sh
-# 取隨便一個文件為例
-drwx------ 2 liang liang 4096 6月 10 15:41 ssh-xxxxxxxxx
-```
-
-* 文件以 10 個字母定義，開頭第 1 個字母為文件類型 
-    * <code>-</code> 普通文件
-    * <code>d</code> 目錄文件
-    * <code>b</code> 塊設備文件 (block)
-    * <code>c</code> 字符 設備文件 (character)
-    * <code>l</code> 符號鏈接文件 (symbolic link file)
-    * <code>p</code> 命令管道文件 (pipe)
-    * <code>s</code> 套接字文件 (socket)
-
-* 後 9 個字母為文件權限，每 3 位一組，每 1 組 rwx 為
-    * <code>r</code>: 讀取
-    * <code>w</code>: 寫
-    * <code>x</code>: 執行
-
-* 數字: 文件硬鏈接的次數: 2
-
-* 文件的所有者 (owner): liang
-
-* 文件的屬組 (group): liang
-
-* 文件大小 (size)，單位是字節: 4096
-
-* 時間戳 (timestamp)，最近一次被修改的時間  
-
-    * 訪問 access
-    * 修改 modify
-    * 改變 change；metadata 元數據
-
-* 文件名稱
-
-
-<br/>
-
-<br/>
 
 # 命令類型
 ### 查詢命令類型

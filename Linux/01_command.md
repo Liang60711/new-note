@@ -107,6 +107,20 @@ du
 <br/>
 
 # 系統管理
+## poweroff reboot
+關機 重啟
+```sh
+# 關機
+poweroff
+# 重啟
+reboot
+```
+
+## tty
+查看目前終端設備
+```sh
+tty
+```
 
 ## type
 顯示命令類型
@@ -228,21 +242,154 @@ traceroute
 
 <br/>
 
-# 其他指令
+# 時間指令
+
+## 硬體時間 系統時間
+* 硬體時間: 指主機板上的時鐘裝置。  
+* 系統時間: 指 kernel 的時鐘。當 Linux 啟動時，系統時間會去讀取硬體時間的設定，之後系統時間即獨立運作。
+
 ## date
-查看日期
+查看系統時間
 ```sh
-date
+# date [option] [+format]
+# 有空格就加引號
+date +%T
+date '+%T %D'
+
+# 顯示格式化時間
+date "+%Y-%m-%d %H:%M:%S"
+```
+修改系統時間，不改要去 timedatectl 將 ntp 關閉
+```sh
+## CC 為幾世紀
+date [MMDDhhmm[[CC]YY][.ss]]
 ```
 
+查看硬體時間
+```sh
+hwclock
+```
+修改硬體時間
+```sh
+hwclock --set --date "2021-01-01 00:00:00"
+```
+同步時間
+```sh
+# hardware clock to system 將硬體時間複製到系統時間 (改成硬體時間)
+# 需先關閉 timedatectl 的 ntp
+hwclock --hctosys
+
+# system to hardware clock 將系統時間改成硬體時間 (改成系統時間)
+hwclock --systohc
+```
+
+
 ## cal
-查看日曆
+查看當月日曆
 ```sh
 cal
 ```
+查看整年年曆
+```
+cal 2021
+```
+
+## timedatectl
+查看系統時間資訊
+```sh
+timedatectl
+```
+設定時區
+```sh
+timedatectl set-timezone "Asia/Taipei"
+```
+設定時區 (使用 GUI)
+```sh
+dpkg-reconfigure tzdata
+```
+
+設定系統時間
+```sh
+timedatectl set-time "2021-01-01"
+```
+如果系統有設定以 ntp 自動校時，在手動更改日期與時間時，就出現這樣的錯誤訊息： <code>Failed to set time: Automatic time synchronization is enabled</code>
+
+所以要先將 ntp 關閉
+```sh
+# 關閉
+timedatectl set-ntp no
+
+# 打開
+timedatectl set-ntp yes
+```
+
+<br/>
+
+<br/>
+
+# 其他指令
 
 ## grep
 查詢某些特定字元，篩選出需要的資訊
 ```sh
 ps -aux|grep sendmail       # 在 ps -aux 指令中，篩選出有關鍵字 sendmail 的資訊
+```
+
+## man 
+查看該指令的操作手冊，分章節:
+1. 用戶命令 (/bin, /usr/bin, /usr/local/bin)
+2. 系統調用
+3. lib 用戶
+4. 特殊文件 (設備文件)
+5. 文件格式 (配置文件的語法)
+6. 遊戲
+7. 雜項 (miscellaneous)
+8. 管理命令 (/sbin, /usr/sbin, /usr/local/sbin)
+9. kernel routines
+
+```sh
+# man <章節> <指令>
+man 4 tty
+```
+一次列出所有章節
+```sh
+# man -aw <指令>
+man -aw passwd
+```
+
+
+每個章節的大綱，又分為:
+* NAME: 名稱
+* SYNOPSIS: 語法
+* DESCRIPTION: 詳盡說明各選項功能
+* OPTIONS: 說明選項意義
+* FILES: 相關配置文件
+* BUGS:
+* EXAMPLES: 範例
+* SEE ALSO: 另外參照
+
+## echo 
+印出文本
+```sh
+echo [string]
+```
+使用跳脫字元選項 <code>-e</code>
+```sh
+echo -e "123\n123"
+```
+
+## printf
+與 ehco 相比，不會自動換行
+```sh
+$ echo "Hello, Shell"
+# Hello, Shell
+
+$ printf "Hello, Shell\n"
+# Hello, Shell
+```
+
+## echo $SHELL
+查看當前 shell 類型
+```sh
+echo $SHELL
 ```
