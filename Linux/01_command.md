@@ -1,111 +1,3 @@
-# 檔案與目錄管理
-## ls
-```sh
-ls -l           # 顯示詳細資料
-ls -a           # 顯示隱藏檔 (以"."開頭的檔案)
-ls -h           # 做單位轉換
-ls -d           # 只顯示目錄
-ls -i           # 顯示 inode (index node)
-ls -r           # 反向排序文件
-ls -R           # 遞迴列出所有子目錄的檔案
-ls -al|more     # 將檔案內容以一頁一頁顯示
-ls -ltr         # 檔案依照時間排序，讓最新的檔案排在最後
-```
-
-## pwd
-```sh
-pwd             # 顯示當前路徑
-```
-
-## cd
-```sh
-cd              # 家目錄
-cd ~            # 家目錄 (同上)
-cd -            # 往返目錄 (遙控器上的返回鍵)
-```
-
-## more
-```sh
-more .bashrc    # 查看 .bashrc 檔案，一頁一頁看
-```
-
-
-## mkdir
-```sh
-mkdir test      # 建立 test 目錄
-```
-
-
-## rmdir
-```sh
-mkdir test      # 移除 test 目錄，如果內有檔案無法刪除
-```
-## rm -rf
-```sh
-rm -rf test     # 強制刪除
-```
-
-## mv
-<code>mv <來源目錄或檔案> <目的目錄></code>
-```sh
-mv .bashrc /    # 將 .bashrc 檔案移至根目錄
-mv /.bashrc .   # 將 /.bashrc 移至目前目錄
-```
-
-## cp
-<code>cp <來源檔案> <目的檔案></code>
-```sh
-cp .bashrc /home
-```
-
-## ln
-連結 (link) 可以視為檔案的別名，分為:
-* 軟連結 (symbolic link):
-    1. 以路徑型式存在，類似 windows 捷徑。 
-    2. 可跨越檔案系統。
-    3. 可對一個不存在的檔案進行連結。
-    4. 可對目錄進行連結。
-* 硬連結 (hard link):  
-    1. 以檔案副本型式存在，但不占用實際空間。
-    2. 不可跨越檔案系統。
-    3. 不可對目錄進行連結。
-    4. ln 指令預設使用應連結。
-    5. 刪除副本檔案會造成原檔案也跟著刪除。
-
-<code>ln -s <來源檔案(目錄)> <目的檔案(目錄)></code>
-```sh
-ln -s /usr/bin bin      # -s 為建立 symbolic 連結
-```
-
-## find 
-搜尋檔案，可以指定範圍。  
-<code>find <路徑> -name <檔名></code>
-```sh
-find / -name bin        # 在跟目錄中尋找名稱為 bin 的檔案
-```
-
-## whereis
-搜尋檔案，利用曾經找過的系統內的資訊找檔案，速度較快，找不到並不代表不存在。
-```sh
-whereis bin
-```
-
-## df
-查看硬碟空間
-```sh
-df
-```
-
-## du
-查看目錄內所有檔案使用的硬碟空間
-```sh
-du
-```
-
-<br/>
-
-<br/>
-
 # 系統管理
 ## poweroff reboot
 關機 重啟
@@ -152,6 +44,24 @@ who
 ```
 ```sh
 w
+```
+## useradd
+
+```sh
+# 新增使用者
+useradd [username]
+
+# 查看使用者
+id [username]
+```
+
+使用 <code>--shell</code> 選項來指定 shell 類型
+```sh
+# 新增使用者並指定 shell
+useradd -s /bin/tcsh [username]
+
+# 查看使用者 shell 類型
+tail -1 /etc/passed
 ```
 
 ## top
@@ -367,6 +277,27 @@ man -aw passwd
 * BUGS:
 * EXAMPLES: 範例
 * SEE ALSO: 另外參照
+
+翻頁指令:  
+* <code>空白鍵</code>: 下一頁
+* <code>b</code>: 上一頁
+* <code>Ctrl+d</code>: 向上半頁
+* <code>Ctrl+u</code>: 向下半頁
+* <code>G</code>: 跳至最後一行
+
+搜索關鍵字
+* 查找不區分大小寫
+* <code>/keyword</code>: 從上開始找
+* <code>?keyword</code>: 從下開始找
+* <code>n</code>: 下一筆資料
+* <code>N</code>:上一筆資料
+
+## info 
+查詢命令線上文檔
+```sh
+info [command]
+```
+
 
 ## echo 
 印出文本
