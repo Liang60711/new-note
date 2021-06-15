@@ -68,7 +68,7 @@ Windows 的動態連結函式庫 (Dynamic link library)，在 windows 中的
 Linux 的動態連結函式庫 (Shared object)
 
 ## FHS
-檔案系統階層標準 (Filesystem Hierarchy Standard)，定義 Linux 作業系統中的主要目錄及目錄內容。
+檔案系統階層標準 (Filesystem Hierarchy Standard)，定義 Linux 作業系統中的主要目錄及目錄內容，任何系統都必須遵循這套標準。
 
 ## Linux 三大分支
 * 三大分支，有些再進行二次分支。

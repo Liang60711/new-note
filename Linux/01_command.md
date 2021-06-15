@@ -1,5 +1,30 @@
 # 系統管理
-## poweroff reboot
+
+## shutdown
+會將系統服務關閉後才關機，比<code>poweroff</code>和<code>halt</code>安全。
+
+```sh
+# 語法
+shutdown [-t seconds] [-rkhncfF] time [message]
+
+# 立馬關機
+shutdown now
+
+# 指定時間關機
+shutdown 21:30       # 指定幾點幾分
+shutdown +10         # 指定 10 分鐘後
+
+# 取消關機 (將指定關機取消)
+shutdown -c
+
+# 重新開機
+shutdown -r
+
+# 關機後停機
+shutdown -h
+```
+
+## halt poweroff reboot
 關機 重啟
 ```sh
 # 關機
@@ -61,7 +86,7 @@ id [username]
 useradd -s /bin/tcsh [username]
 
 # 查看使用者 shell 類型
-tail -1 /etc/passed
+tail -1 /etc/passwd
 ```
 
 ## top
@@ -162,14 +187,21 @@ traceroute
 查看系統時間
 ```sh
 # date [option] [+format]
-# 有空格就加引號
+# 顯示日期
+date +%F    # 2021-01-01
+date +%D    # 01/01/21
+
+# 顯示時間，有空格就加引號
 date +%T
-date '+%T %D'
+date "+%T %D"
 
 # 顯示格式化時間
 date "+%Y-%m-%d %H:%M:%S"
+
+## timestamp 秒數
+date +%s
 ```
-修改系統時間，不改要去 timedatectl 將 ntp 關閉
+修改系統時間，要去 timedatectl 將 ntp 關閉才能改
 ```sh
 ## CC 為幾世紀
 date [MMDDhhmm[[CC]YY][.ss]]
@@ -188,9 +220,11 @@ hwclock --set --date "2021-01-01 00:00:00"
 # hardware clock to system 將硬體時間複製到系統時間 (改成硬體時間)
 # 需先關閉 timedatectl 的 ntp
 hwclock --hctosys
+hwclock -s
 
-# system to hardware clock 將系統時間改成硬體時間 (改成系統時間)
+# system to hardware clock 將系統時間複製到硬體時間 (改成系統時間)
 hwclock --systohc
+hwclock -w
 ```
 
 
@@ -283,7 +317,9 @@ man -aw passwd
 * <code>b</code>: 上一頁
 * <code>Ctrl+d</code>: 向上半頁
 * <code>Ctrl+u</code>: 向下半頁
+* <code>g</code>: 跳至第一行
 * <code>G</code>: 跳至最後一行
+* <code>數字+g</code>: 跳至第幾行
 
 搜索關鍵字
 * 查找不區分大小寫
@@ -303,10 +339,12 @@ info [command]
 印出文本
 ```sh
 echo [string]
-```
-使用跳脫字元選項 <code>-e</code>
-```sh
+
+# 使用跳脫字元選項 <code>-e</code>
 echo -e "123\n123"
+
+# 不自動換行
+echo -n "123"
 ```
 
 ## printf
@@ -323,4 +361,16 @@ $ printf "Hello, Shell\n"
 查看當前 shell 類型
 ```sh
 echo $SHELL
+```
+
+## 雙引號 單引號
+```sh
+# 雙引號，弱引用，可以使用變數
+echo "$SHELL"       # /bin/bash
+
+# 單引號，強引用
+echo '$SHELL'       # $SHELL
+
+# {} 變數正規符號
+echo ${SHELL}
 ```
