@@ -54,6 +54,15 @@ su
 ```sh
 sudo passwd root
 ```
+切換用戶 switch user
+```sh
+# 切換
+su -l USERNAME
+```
+```sh
+# 退出
+exit
+```
 
 ## passwd
 更改登入密碼

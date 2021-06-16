@@ -84,6 +84,14 @@ Linux 的動態連結函式庫 (Shared object)
         * CentOS (Community ENTerprise OS，RHEL 社群版)
         * Fedora Core (每6個月更新)
 
+
+## 編譯方式
+* Linux 的 Library 由 glibc 所提供。
+1. 動態(鏈接)編譯: 撰寫程式時，不將 lib model 寫進入程式中；執行程式時會調用 lib model；優點是節省記憶體資源。
+2. 靜態編譯: 撰寫程式就將 lib model 複製進程式內部中；優點是不管到哪個系統中，都可以執行，不用擔心沒有該 model。
+
+
+
 <br/>
 
 <br/>
@@ -117,16 +125,6 @@ Linux 的動態連結函式庫 (Shared object)
 
 7. 切換虛擬terminal <code>Ctrl</code> + <code>Alt</code> + <code>F1~F6</code>
 
-8. 切換用戶 switch user
-
-    ```sh
-    # 切換
-    su -l 用戶名
-    ```
-    ```sh
-    # 退出
-    exit
-    ```
 
 
 <br>

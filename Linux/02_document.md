@@ -41,16 +41,19 @@ drwx------ 2 liang liang 4096 6月 10 15:41 ssh-xxxxxxxxx
 
 * 時間戳 (timestamp)，最近一次被修改的時間  
 
-    * 訪問 access
-    * 修改 modify
-    * 改變 change；metadata 元數據
-
 * 檔案名稱
 
-## 編譯方式
-* Linux 的 Library 由 glibc 所提供。
-1. 動態(鏈接)編譯: 撰寫程式時，不將 lib model 寫進入程式中；執行程式時會調用 lib model；優點是節省記憶體資源。
-2. 靜態編譯: 撰寫程式就將 lib model 複製進程式內部中；優點是不管到哪個系統中，都可以執行，不用擔心沒有該 model。
+
+## Data 和 Metadata
+Data: 檔案本身的資料
+```sh
+cat FILE
+```
+Metadata: 用來描述檔案資料的資料，如檔案名稱、修改時間等。
+```sh
+stat FILE
+```
+
 
 ## 檔案種類 (以外部來看)
 1. 二進制檔案
@@ -75,6 +78,9 @@ drwx------ 2 liang liang 4096 6月 10 15:41 ssh-xxxxxxxxx
 * <code>/media</code>: 外接式設備，掛載點。
 * <code>/mnt</code>: 其他檔案系統的臨時掛載點。
 * <code>/opt</code>: 附加應用程式的安裝位置，可選路徑。
+* <code>/proc</code>: 虛擬檔案系統，不佔任何硬碟空間。
+* <code>/sys</code>: 虛擬檔案系統，較<code>proc</code>新。
+
 * <code>/tmp</code>: 臨時檔案；所有用戶都可以使用。
 * <code>/usr</code>: 此目錄包括許多子目錄，用來存放系統指令、安裝程式及套件。
     * <code>/usr/local</code>: 讓系統管理員安裝應用程式、安裝第三方程式(舊版本會安裝在 <code>/opt</code>)。
@@ -143,53 +149,100 @@ cd -            # 往返目錄 (遙控器上的返回鍵)
 concatenate (連接)，連接檔案並 print 出來，只能印出文字檔案；可以先用 <code>file</code> 查看是否為文字檔案
 ```sh
 # 單個檔案
-cat FILENAME
+cat FILE
 
 # 可多檔案一同查看
-cat FILENAME_1 FILENAME_2
+cat FILE_1 FILE_2
 
-# 增加行號
-cat -n FILENAME
+# 增加行號(常用)
+cat -n FILE
 ```
 
 ## tac
 與<code>cat</code>相同，只是倒著顯示。
 ```sh
-tac FILENAME
+tac FILE
 ```
 
 
 ## file
 查看檔案類型
 ```sh
-file FILENAME
+file FILE
 ```
 
 
 ## more
 一頁一頁查看
 ```sh
-more FILENAME
+more FILE
 ```
 
 ## less
 與<code>more</code>類似，多了一個向前翻頁的功能
 ```sh
 # 1
-less FILENAME
+less FILE
 
 # 2
 man ls|less
 ```
 
-## head, tail
+## head
+預設是 10 行
 ```sh
 # 只看檔案前幾行
-head FILENAME
+head FILE
 
-# 只看檔案後幾行
-tail FILENAME
+# 更改行數至 20 行
+head -n 20 FILE
 ```
+
+## tail
+預設是 10 行，一樣可以更改行數
+```sh
+# 只看檔案後幾行
+tail FILE
+
+# 查看檔案尾部後不退出，進入監控狀態
+tail -f FILE
+```
+
+## stat
+查看檔案相關資訊，每個檔案都有 3 個 timestamp (存取時間、資料修改時間、狀態修改時間)
+```sh
+# stat DIR
+# stat FILE
+
+# access time：2021-06-16 14:15:05.660007370 +0800
+# modify time：2021-06-09 17:41:29.636095721 +0800
+# change time：2021-06-09 17:41:29.636095721 +0800
+```
+可以使用 <code>touch</code> 來更改這 3 個 timestamp
+```sh
+# 查看 metadata
+stat /root/.bash_history
+
+# 更改 3 個 timestamp 至最新
+touch /root/.bash_history
+
+# -a 僅修改 access time
+# -m 僅修改 modify time
+# -t STAMP [[CC]YY]MMDDhhmm[.ss] 指定修改時間
+touch -t 202101010000.00 /root/.bash_history
+```
+
+## touch
+可以更改 timestamp 和 建立空檔案。
+```sh
+# 檔案不存在，就會建立一個新檔案
+touch /tmp/hello
+
+# -c 即使檔案不存在，也不建立新檔案
+touch -c /tmp/hello
+```
+
+
 
 ## alias unalias
 查看/定義別名；僅對當前 shell 有效
@@ -227,15 +280,35 @@ who
 w
 ```
 
-
-
-## mkdir
+## tree
+查看檔案樹狀結構
 ```sh
-mkdir test      # 建立 test 目錄
+tree DIRECTORY
+
+# 只顯示層級 1 檔案
+tree -L 1 /tmp
 ```
 
 
+
+## mkdir
+創建目錄時，需要確保 dirname 已經存在，才能建立 basename。
+```sh
+# 在 z 建立之前，需要確保 /tmp/x/y 路徑都已經存在。
+mkdir /tmp/x/y/z
+```
+所以較快的方式是 <code>-p</code>，可以一次建立所有尚未建立的目錄。
+```sh
+# 順序為建立 x >> y >> z
+mkdir -p /tmp/x/y/z
+```
+顯示詳細過程
+```sh
+mkdir -pv /tmp/x/y/z
+```
+
 ## rmdir
+只能刪除空目錄
 ```sh
 mkdir test      # 移除 test 目錄，如果內有檔案無法刪除
 ```
@@ -244,18 +317,38 @@ mkdir test      # 移除 test 目錄，如果內有檔案無法刪除
 rm -rf test     # 強制刪除
 ```
 
+
+
+## cp
+* 單檔案複製: <code>cp [OPTION]...[-T] SOURCE DEST</code>
+    * 若 DEST 不存在: 會建立新檔案，並複製到 DEST
+    * 若 DEST 存在: 
+        * DEST 非目錄: 覆蓋原檔案(無法恢復)。
+        * DEST 是目錄: 在目錄下建立同名檔案，並複製到 DEST 中。
+* 多檔案複製: <code>cp [OPTION]...SOURCE...DIRECTORY</code>
+    * 若 DIRECTORY 不存在，錯誤
+    * 若 DIRECTORY 存在:
+        * DIRECTORY 非目錄: 錯誤。
+        * DIRECTORY 是目錄: 分別複製每個同名檔案。
+
+* 多檔案複製(倒過來寫): <code>cp [OPTION]...-t DIRECTORY SOURCE...</code>  
+
+```sh
+# -i --interactive 若有覆蓋動作會先提示
+# -f --force 強制覆蓋目標檔案
+# -r --recursive 複製目錄及內容檔案
+cp -r /var/log /tmp/
+
+# -d  
+```
+
 ## mv
-<code>mv <來源目錄或檔案> <目的目錄></code>
+與 <code>cp</code> 邏輯相同
 ```sh
 mv .bashrc /    # 將 .bashrc 檔案移至根目錄
 mv /.bashrc .   # 將 /.bashrc 移至目前目錄
 ```
 
-## cp
-<code>cp <來源檔案> <目的檔案></code>
-```sh
-cp .bashrc /home
-```
 
 ## ln
 連結 (link) 可以視為檔案的別名，分為:
