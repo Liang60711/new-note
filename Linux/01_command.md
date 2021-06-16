@@ -267,7 +267,7 @@ timedatectl set-time "2021-01-01"
 ```
 如果系統有設定以 ntp 自動校時，在手動更改日期與時間時，就出現這樣的錯誤訊息： <code>Failed to set time: Automatic time synchronization is enabled</code>
 
-所以要先將 ntp 關閉
+所以要先將 ntp (Network Time Protoco) 關閉
 ```sh
 # 關閉
 timedatectl set-ntp no
@@ -282,10 +282,12 @@ timedatectl set-ntp yes
 
 # 其他指令
 
-## grep
+## grep (global search regular expression(RE) and print out the line)
 查詢某些特定字元，篩選出需要的資訊
 ```sh
 ps -aux|grep sendmail       # 在 ps -aux 指令中，篩選出有關鍵字 sendmail 的資訊
+
+man ls|grep later           # 篩選在 ls 手冊中有含關鍵字 later 
 ```
 
 ## man 
@@ -307,7 +309,7 @@ man 4 tty
 一次列出所有章節
 ```sh
 # man -aw <指令>
-man -aw passwd
+man -aw tty
 ```
 
 

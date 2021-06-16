@@ -62,10 +62,10 @@ kernel 的 system call 過於底層，所以造成系統開發難度高，故將
 
 
 ## .dll
-Windows 的動態連結函式庫 (Dynamic link library)，在 windows 中的
+Windows 的動態連結函式庫 (Dynamic link library) 檔案。
 
 ## .so 文件
-Linux 的動態連結函式庫 (Shared object)
+Linux 的動態連結函式庫 (Shared object) 檔案。
 
 ## FHS
 檔案系統階層標準 (Filesystem Hierarchy Standard)，定義 Linux 作業系統中的主要目錄及目錄內容，任何系統都必須遵循這套標準。
@@ -139,10 +139,14 @@ Linux 的動態連結函式庫 (Shared object)
 2. 外部命令: 因為使用上太佔記憶體，在系統載入時，不一定會一起被載入到記憶體中，需要時再調用；**在文件系統的某個路徑下，會有一個與命令相同的執行文件**。
 
 ### 查詢環境變數
-輸入 <code>printenv</code>，會找到 PATH。
+輸入 <code>printenv</code>，會找到 $PATH。
 ```sh
 # 路徑使用 : 隔開 代表尋找文件的優先順序
 PATH=/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin
+```
+直接印出也可以
+```sh
+echo $PATH
 ```
 
 ### hash 暫存
