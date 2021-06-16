@@ -313,7 +313,10 @@ mkdir -pv /tmp/x/y/z
 mkdir test      # 移除 test 目錄，如果內有檔案無法刪除
 ```
 ## rm -rf
+建議不用的檔案不要直接刪除，而是移動到某個專用目錄。
 ```sh
+# -r 遞迴
+# -f 強制
 rm -rf test     # 強制刪除
 ```
 
