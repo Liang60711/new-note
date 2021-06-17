@@ -123,8 +123,22 @@ Linux 的動態連結函式庫 (Shared object) 檔案。
         4. ksh
         5. tcsh
 
-7. 切換虛擬terminal <code>Ctrl</code> + <code>Alt</code> + <code>F1~F6</code>
+7. 虛擬terminal: 
+    * 查看虛擬終端
 
+        ```sh
+        tty
+        ```
+    * 更改虛擬終端   
+        可以使用快捷鍵 <code>Ctrl</code> + <code>Alt</code> + <code>F1~F6</code>，或是使用指令
+
+        ```sh
+        # 切換到 tty3
+        # change virtual terminal 
+        chvt 3
+        ```
+
+    * 有些圖形化介面的 Linux 版本 <code>F1~F2</code> 為系統佔用。
 
 
 <br>

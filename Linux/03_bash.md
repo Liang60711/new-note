@@ -24,10 +24,10 @@ history -c
 # 刪除指定 history 304行
 history -d 304
 
-# 將目前記憶體中紀錄，存到歷史檔案
+# 將當前 shell 的記憶體中紀錄，存到歷史檔案
 history -w
 
-# 從歷史檔案讀取紀錄
+# 從歷史檔案讀取至此 shell 的記憶體中
 history -r
 
 # 使用最近一個以 m 開頭的指令 (常用)
@@ -44,9 +44,6 @@ HISTSIZE=1001
 ```
 
 
-(常用指令)使用上一個命令的最後一個參數: 
-1. 快捷鍵形式: <code>ESC</code> 再按 <code>.</code>。
-2. 字串形式: <code>!$</code>
 
 <br/>
 
@@ -128,8 +125,45 @@ mkdir $(date +%H:%M:%S)
 * 命令引用: ``
 
 ## 快捷鍵
+使用上一個命令的最後一個參數: 
+1. 快捷鍵形式: <code>ESC</code> 再按 <code>.</code>。
+2. 字串形式: <code>!$</code>
+
+重複使用上一個命令
+1. <code>!!</code>，Enter
+2. <code>ctrl+p</code>，Enter
+3. up 鍵，Enter
+
+命令行快捷鍵: 
 * <code>ctrl+a</code>: 跳至命令行字首 
 * <code>ctrl+e</code>: 跳至命令行字尾
 * <code>ctrl+u</code>: 刪除命令行字首到游標處
 * <code>ctrl+k</code>: 刪除命令行游標處到字尾
 * <code>ctrl+l</code>: 同命令 <code>clear</code>
+
+
+## 一次操作多個檔案
+globbing: 用於查找 Linux 檔案系統符合**檔案名稱**的函式，不能用在檔案中的資料；與 regex 有些相似，但是不同的用法。
+* <code>*</code>: 找任意長度的字串。
+* <code>?</code>: 找任意**單個**字元。
+* <code>[]</code>: 括號內的任意**單個**字元。
+    * [a-z]，字母，不區分大小寫。
+    * [0-9]，數字。
+    * [[:upper:]]，所有大寫字母。
+    * [[:lower:]]，所有小寫字母。
+    * [[:alpha:]]，所有字母。
+    * [[:digit:]]，所有數字。
+    * [[:alnum:]]，所有字母和數字。
+    * [[:space:]]，所有空白字元。
+    * [[:punct:]]，所有標點符號。
+    * [^[:alnum:]]，所有非字母和數字的字串，<code>^</code>為排除符號。
+
+<br/>
+
+```sh
+# 查找 /var 目錄中，以 l 開頭、第二個字為任意字、結尾為小寫的檔案或目錄 (-d 對檔案無影響，還是會顯示)
+ls -d /var/l?[[:lower:]]
+
+# 將 /etc 下以 m,n,r,p 開頭，以 .conf 結尾的目錄或檔案複製到 /tmp/x
+cp -r /etc/[mnrp]*.conf /tmp/x
+```

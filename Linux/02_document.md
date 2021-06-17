@@ -122,11 +122,12 @@ ls -l           # 顯示詳細資料
 ls -a           # 顯示隱藏檔 (以"."開頭的檔案)
 ls -A           # 與 -a 相同，少了 . 和 .. 兩個檔案
 ls -h           # 做單位轉換
-ls -d           # 只顯示目錄
+ls -d           # 僅列出目錄本身，而不是列出目錄內的檔案資料(常用)
 ls -i           # 顯示 inode (index node)
 ls -r           # 反向排序檔案
 ls -R           # 遞迴列出所有子目錄的檔案
 ls -al|more     # 將檔案內容以一頁一頁顯示
+ls -al /etc|grep yum   # /etc 中找關鍵字 yum 的檔案
 ls -ltr         # 檔案依照時間排序，讓最新的檔案排在最後
 ```
 
@@ -141,7 +142,7 @@ change directory
 ```sh
 cd              # 家目錄
 cd ~            # 家目錄 (同上)
-cd ~$username   # 切換至指定用戶的家目錄
+cd ~USERNAME    # 切換至指定用戶的家目錄
 cd -            # 往返目錄 (遙控器上的返回鍵)
 ```
 
@@ -196,6 +197,12 @@ head FILE
 
 # 更改行數至 20 行
 head -n 20 FILE
+
+# 查看檔案前 10 行
+cat FILE|head
+
+# 查看檔案前 n 行
+cat FILE|head -n
 ```
 
 ## tail
@@ -272,8 +279,8 @@ whereis COMMAND
 
 # 查找登入用戶
 who
-# -b 系統啟動時間
-# -r 運行級別
+# -b --boot 系統啟動時間
+# -r --runlevel 運行級別
 
 
 # 同 who，多了檢視時間 
@@ -297,7 +304,7 @@ tree -L 1 /tmp
 # 在 z 建立之前，需要確保 /tmp/x/y 路徑都已經存在。
 mkdir /tmp/x/y/z
 ```
-所以較快的方式是 <code>-p</code>，可以一次建立所有尚未建立的目錄。
+所以較快的方式是 <code>-p</code>、<code>--parents</code>，可以一次建立所有尚未建立的目錄。
 ```sh
 # 順序為建立 x >> y >> z
 mkdir -p /tmp/x/y/z
@@ -341,8 +348,6 @@ rm -rf test     # 強制刪除
 # -f --force 強制覆蓋目標檔案
 # -r --recursive 複製目錄及內容檔案
 cp -r /var/log /tmp/
-
-# -d  
 ```
 
 ## mv
@@ -385,16 +390,19 @@ find / -name bin        # 在跟目錄中尋找名稱為 bin 的檔案
 whereis bin
 ```
 
-## df
+## df (disk free)
 查看硬碟空間
 ```sh
 df
 ```
 
-## du
+## du (disk usage)
 查看目錄內所有檔案使用的硬碟空間
 ```sh
 du
+
+# -h --human-readable 更換單位
+# -m --megabytes 以 MB 為單位
 ```
 
 <br/>
