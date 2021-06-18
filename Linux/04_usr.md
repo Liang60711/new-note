@@ -23,9 +23,14 @@
     * 名稱解析: 轉換 username 和 uid，需要有查詢表，位置在 <code>/etc/passwd</code>。
 
     * <code>/etc/passwd</code> 用戶查詢表: 
-        * 格式為 `name:password:UID:GID:GECOS:directory:shell`
-
-        
+        * 格式: `name:password:UID:GID:GECOS:directory:shell`
+            * `name`: 用戶名稱
+            * `password`: 可以是加密密碼，也可以是佔位符`x`
+            * `UID`: 用戶 ID
+            * `GID`: 群組 ID
+            * `GECOS`: 備註
+            * `directory`: 用戶家目錄
+            * `shell`: 用戶預設 shell
 
 <br/>
 
@@ -41,13 +46,20 @@
         * 系統群組 ID: <code>1-999</code>
         * 登錄群組 ID: <code>1000-60000</code>
     
-    * 名稱解析: 轉換 groupname 和 gid  <code>/etc/group</code>。
+    * 名稱解析: 轉換 groupname 和 gid <code>/etc/group</code>。
+        * 格式: `group_name:password:GID:user_list`
 
 
 ## 密碼認證
 * 通過事先儲存的密碼，與登錄時提供的密碼進行比對。
 * 早期密碼儲存位置同 uid 查詢表中 (<code>/etc/passwd</code>)，後來因安全問題改至
     * 用戶密碼: <code>/etc/shadow</code>。
+        * 格式: `用戶名:加密的密碼:最近一次修改密碼的時間:最短使用期限:最長使用期限:警告期:過期日期:保留字串`
+            * `最短使用期限`: 修改密碼的冷卻時間。
+            * `最長使用期限`: 密碼使用超過此時間，需進行更換。
+            * `警告期`: 密碼到期之前提醒的時間
+            * `過期日期`: 可自行設定密碼過期日期
+
     * 群駔密碼: <code>/etc/gshadow</code>。
 
 * [加密算法](https://github.com/Liang60711/Note/blob/67087d3e3b2b3f70313359e635eb9e1cfec77e67/Basic/0_osi.md#ssl-%E5%8D%94%E5%AE%9A):
@@ -67,3 +79,9 @@
             ```
     
     * 如果密碼相同，而產出相同的 hash，同樣有風險，故在進行 hash 算法前，會加入 salt (隨機數)，確保 hash 會不一樣。
+
+<br/>
+
+<br/>
+
+# 命令
