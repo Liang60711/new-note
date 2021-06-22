@@ -6,13 +6,13 @@
 history
 ```
 自定義 history 功能，可更改環境變數。
-* <code>$HISTSIZE</code>: 記憶體中保存的數量。
-* <code>$HISTFILE</code>: 歷史檔案位置。
-* <code>$HISTFILESIZE</code>: 歷史檔案中保存的數量 (關機時會將記憶體中的指令存成檔案)。
-* <code>$HISTCONTROL</code>: 紀錄環境變數，分為: 
-    * <code>ignoredups</code>: 忽略連續的指令，只會紀錄一筆
-    * <code>ignorespace</code>: 忽略以空白字串開頭的指令
-    * <code>ignoreboth</code>: 同時啟用
+* `$HISTSIZE`: 記憶體中保存的數量。
+* `$HISTFILE`: 歷史檔案位置。
+* `$HISTFILESIZE`: 歷史檔案中保存的數量 (關機時會將記憶體中的指令存成檔案)。
+* `$HISTCONTROL`: 紀錄環境變數，分為: 
+    * `ignoredups`: 忽略連續的指令，只會紀錄一筆
+    * `ignorespace`: 忽略以空白字串開頭的指令
+    * `ignoreboth`: 同時啟用
 
 ```sh
 # 查看環境變數
@@ -57,8 +57,8 @@ HISTSIZE=1001
 
 
 ## 命令行展開
-* <code>~</code>: 自動展開為用戶的家目錄，或指定用戶的家目錄。
-* <code>{}</code>: 可裝入一個以逗點分隔的路徑列表，並能夠展開為多個路徑；如: <code>/tmp/{a,b}</code> 等於 <code>/tmp/a</code> 和 <code>/tmp/b</code>
+* `~`: 自動展開為用戶的家目錄，或指定用戶的家目錄。
+* `{}`: 可裝入一個以逗點分隔的路徑列表，並能夠展開為多個路徑；如: `/tmp/{a,b}` 等於 `/tmp/a` 和 `/tmp/b`
 
 ```sh
 # 如何同時建立 4 個目錄
@@ -105,7 +105,7 @@ mkdir -pv /tmp/mysysroot/{bin,sbin,etc/sysconfig/network-scripts,usr/{bin,sbin,l
 ```
 
 ## 命令執行結果狀態碼
-可使用 <code>$?</code> 來回報上一個命令的結果:
+可使用 `$?` 來回報上一個命令的結果:
 * 成功: 0
 * 失敗: 1-255
 
@@ -126,27 +126,27 @@ mkdir $(date +%H:%M:%S)
 
 ## 快捷鍵
 使用上一個命令的最後一個參數: 
-1. 快捷鍵形式: <code>ESC</code> 再按 <code>.</code>。
-2. 字串形式: <code>!$</code>
+1. 快捷鍵形式: `ESC` 再按 `.`。
+2. 字串形式: `!$`
 
 重複使用上一個命令
-1. <code>!!</code>，Enter
-2. <code>ctrl+p</code>，Enter
+1. `!!`，Enter
+2. `ctrl+p`，Enter
 3. up 鍵，Enter
 
 命令行快捷鍵: 
-* <code>ctrl+a</code>: 跳至命令行字首 
-* <code>ctrl+e</code>: 跳至命令行字尾
-* <code>ctrl+u</code>: 刪除命令行字首到游標處
-* <code>ctrl+k</code>: 刪除命令行游標處到字尾
-* <code>ctrl+l</code>: 同命令 <code>clear</code>
+* `ctrl+a`: 跳至命令行字首 
+* `ctrl+e`: 跳至命令行字尾
+* `ctrl+u`: 刪除命令行字首到游標處
+* `ctrl+k`: 刪除命令行游標處到字尾
+* `ctrl+l`: 同命令 `clear`
 
 
 ## 一次操作多個檔案
 globbing: 用於查找 Linux 檔案系統符合**檔案名稱**的函式，不能用在檔案中的資料；與 regex 有些相似，但是不同的用法。
-* <code>*</code>: 找任意長度的字串。
-* <code>?</code>: 找任意**單個**字元。
-* <code>[]</code>: 括號內的任意**單個**字元。
+* `*`: 找任意長度的字串。
+* `?`: 找任意**單個**字元。
+* `[]`: 括號內的任意**單個**字元。
     * [a-z]，字母，不區分大小寫。
     * [0-9]，數字。
     * [[:upper:]]，所有大寫字母。
@@ -156,7 +156,7 @@ globbing: 用於查找 Linux 檔案系統符合**檔案名稱**的函式，不�
     * [[:alnum:]]，所有字母和數字。
     * [[:space:]]，所有空白字元。
     * [[:punct:]]，所有標點符號。
-    * [^[:alnum:]]，所有非字母和數字的字串，<code>^</code>為排除符號。
+    * [^[:alnum:]]，所有非字母和數字的字串，`^`為排除符號。
 
 <br/>
 

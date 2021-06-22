@@ -1,7 +1,7 @@
 # 系統管理
 
 ## shutdown
-會將系統服務關閉後才關機，比<code>poweroff</code>和<code>halt</code>安全。
+會將系統服務關閉後才關機，比`poweroff`和`halt`安全。
 
 ```sh
 # 語法
@@ -72,7 +72,7 @@ passwd
 
 ## who
 查看系統上的使用者。  
-<code>who</code> 和 <code> w</code> 功能基本相同，<code>who</code> 僅列出 user 和 登入時間。
+`who` 和 ` w` 功能基本相同，`who` 僅列出 user 和 登入時間。
 ```sh
 who
 ```
@@ -89,7 +89,7 @@ useradd [username]
 id [username]
 ```
 
-使用 <code>--shell</code> 選項來指定 shell 類型
+使用 `--shell` 選項來指定 shell 類型
 ```sh
 # 新增使用者並指定 shell
 useradd -s /bin/tcsh [username]
@@ -265,7 +265,7 @@ dpkg-reconfigure tzdata
 ```sh
 timedatectl set-time "2021-01-01"
 ```
-如果系統有設定以 ntp 自動校時，在手動更改日期與時間時，就出現這樣的錯誤訊息： <code>Failed to set time: Automatic time synchronization is enabled</code>
+如果系統有設定以 ntp 自動校時，在手動更改日期與時間時，就出現這樣的錯誤訊息： `Failed to set time: Automatic time synchronization is enabled`
 
 所以要先將 ntp (Network Time Protoco) 關閉
 ```sh
@@ -324,20 +324,20 @@ man -aw tty
 * SEE ALSO: 另外參照
 
 翻頁指令:  
-* <code>空白鍵</code>: 下一頁
-* <code>b</code>: 上一頁
-* <code>Ctrl+d</code>: 向上半頁
-* <code>Ctrl+u</code>: 向下半頁
-* <code>g</code>: 跳至第一行
-* <code>G</code>: 跳至最後一行
-* <code>數字+g</code>: 跳至第幾行
+* `空白鍵`: 下一頁
+* `b`: 上一頁
+* `Ctrl+d`: 向上半頁
+* `Ctrl+u`: 向下半頁
+* `g`: 跳至第一行
+* `G`: 跳至最後一行
+* `數字+g`: 跳至第幾行
 
 搜索關鍵字
 * 查找不區分大小寫
-* <code>/keyword</code>: 從上開始找
-* <code>?keyword</code>: 從下開始找
-* <code>n</code>: 下一筆資料
-* <code>N</code>:上一筆資料
+* `/keyword`: 從上開始找
+* `?keyword`: 從下開始找
+* `n`: 下一筆資料
+* `N`:上一筆資料
 
 ## info 
 查詢命令線上文檔
@@ -351,7 +351,7 @@ info [command]
 ```sh
 echo [string]
 
-# 使用跳脫字元選項 <code>-e</code>
+# 使用跳脫字元選項 `-e`
 echo -e "123\n123"
 
 # 不自動換行

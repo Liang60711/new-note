@@ -130,7 +130,7 @@ Linux 的動態連結函式庫 (Shared object) 檔案。
         tty
         ```
     * 更改虛擬終端   
-        可以使用快捷鍵 <code>Ctrl</code> + <code>Alt</code> + <code>F1~F6</code>，或是使用指令
+        可以使用快捷鍵 `Ctrl` + `Alt` + `F1~F6`，或是使用指令
 
         ```sh
         # 切換到 tty3
@@ -138,7 +138,7 @@ Linux 的動態連結函式庫 (Shared object) 檔案。
         chvt 3
         ```
 
-    * 有些圖形化介面的 Linux 版本 <code>F1~F2</code> 為系統佔用。
+    * 有些圖形化介面的 Linux 版本 `F1~F2` 為系統佔用。
 
 
 <br>
@@ -148,12 +148,12 @@ Linux 的動態連結函式庫 (Shared object) 檔案。
 
 # 命令類型
 ### 查詢命令類型
-輸入 <code>type</code> 指令來查看命令類型。
+輸入 `type` 指令來查看命令類型。
 1. 內建命令: shell builtin，是 shell 的一部分，通常在運行 Linux 時，就會被載入在記憶體中。
 2. 外部命令: 因為使用上太佔記憶體，在系統載入時，不一定會一起被載入到記憶體中，需要時再調用；**在文件系統的某個路徑下，會有一個與命令相同的執行文件**。
 
 ### 查詢環境變數
-輸入 <code>printenv</code>，會找到 $PATH。
+輸入 `printenv`，會找到 $PATH。
 ```sh
 # 路徑使用 : 隔開 代表尋找文件的優先順序
 PATH=/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin
@@ -164,7 +164,7 @@ echo $PATH
 ```
 
 ### hash 暫存
-輸入 <code>hash</code>，查詢命令暫存表。
+輸入 `hash`，查詢命令暫存表。
 
 系统下會有 hash 表，每個 shell 獨立，每當執行命令時，hash 表會記錄命令的路徑。第一次執行命令 shell 會從 PATH 路徑下找該命令的路徑，當第二次使用該命令時，shell 會查看 hash 表，沒有該命令才會去 PATH 路徑下尋找。
 

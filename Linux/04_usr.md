@@ -15,14 +15,14 @@
     2. 普通用戶: 分為**系統用戶**及**登錄用戶**
 
 * 用戶 ID: 稱為 **UID**；16 bits 二進制 (0-65535)。
-    1. 管理員 ID: <code>0</code>
-    2. 普通用戶 ID: <code>1-65535</code>
-        * 系統用戶 ID: <code>1-999</code>
-        * 登錄用戶 ID: <code>1000-60000</code>
+    1. 管理員 ID: `0`
+    2. 普通用戶 ID: `1-65535`
+        * 系統用戶 ID: `1-999`
+        * 登錄用戶 ID: `1000-60000`
     
-    * 名稱解析: 轉換 username 和 uid，需要有查詢表，位置在 <code>/etc/passwd</code>。
+    * 名稱解析: 轉換 username 和 uid，需要有查詢表，位置在 `/etc/passwd`。
 
-    * <code>/etc/passwd</code> 用戶查詢表: 
+    * `/etc/passwd` 用戶查詢表: 
         * 格式: `name:password:UID:GID:GECOS:directory:shell`
             * `name`: 用戶名稱
             * `password`: 可以是加密密碼，也可以是佔位符`x`
@@ -41,34 +41,34 @@
     2. 普通用戶群組: 分為**系統群組**及**登錄群組**
 
 * 群組 ID: 稱為 **GID**；16 bits 二進制 (0-65535)。
-    1. 管理群組 ID: <code>0</code>
-    2. 普通群組 ID: <code>1-65535</code>
-        * 系統群組 ID: <code>1-999</code>
-        * 登錄群組 ID: <code>1000-60000</code>
+    1. 管理群組 ID: `0`
+    2. 普通群組 ID: `1-65535`
+        * 系統群組 ID: `1-999`
+        * 登錄群組 ID: `1000-60000`
     
-    * 名稱解析: 轉換 groupname 和 gid <code>/etc/group</code>。
+    * 名稱解析: 轉換 groupname 和 gid `/etc/group`。
         * 格式: `group_name:password:GID:user_list`
 
 
 ## 密碼認證
 * 通過事先儲存的密碼，與登錄時提供的密碼進行比對。
-* 早期密碼儲存位置同 uid 查詢表中 (<code>/etc/passwd</code>)，後來因安全問題改至
-    * 用戶密碼: <code>/etc/shadow</code>。
+* 早期密碼儲存位置同 uid 查詢表中 (`/etc/passwd`)，後來因安全問題改至
+    * 用戶密碼: `/etc/shadow`。
         * 格式: `用戶名:加密的密碼:最近一次修改密碼的時間:最短使用期限:最長使用期限:警告期:過期日期:保留字串`
             * `最短使用期限`: 修改密碼的冷卻時間。
             * `最長使用期限`: 密碼使用超過此時間，需進行更換。
             * `警告期`: 密碼到期之前提醒的時間
             * `過期日期`: 可自行設定密碼過期日期
 
-    * 群駔密碼: <code>/etc/gshadow</code>。
+    * 群駔密碼: `/etc/gshadow`。
 
 * [加密算法](https://github.com/Liang60711/Note/blob/67087d3e3b2b3f70313359e635eb9e1cfec77e67/Basic/0_osi.md#ssl-%E5%8D%94%E5%AE%9A):
     1. 對稱加密: plain text 加密為 cipher text。
     2. 非對稱加密。
 
     * 雜湊 (hash) 算法:
-        * <code>md5</code>: message digest；128 bits。
-        * <code>sha</code> :secure hash algorithm；160 bits。
+        * `md5`: message digest；128 bits。
+        * `sha` :secure hash algorithm；160 bits。
 
             ```sh
             # md5sum
