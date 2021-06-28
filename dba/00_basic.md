@@ -23,5 +23,18 @@
 |交換機|L2/L3 switch|FC switch/director|
 
 
-## Fibre Channel (FC)
+## SCSI iSCSI FC 協議
+* SCSI: 小型計算機系統接口 (Small Computer System Interface)。
+
+* iSCSI: 網際網路小型計算機系統接口 (Internet Small Computer System Interface)，是一種在TCP/IP上進行數據塊傳輸的標準，實現在IP網絡上運行SCSI協議。
+
+
+* FC: 光纖通道 (Fibre Channel)，
 是一種高速網路互聯技術（最高速度128Gbps），主要用於連接儲存裝置，為企業級儲存 SAN 中的一種常見連接類型。
+
+
+## target lun
+NAS 上會有許多 SCSI，但數量是有限制的，通常會用 target ID 來描述這些設備，設備只要一加入系統，就會有 ID。當 target ID 數量不夠時，採用 lun ID，擴充了每個 target ID，`每個 target 下都可以有多個lun `。
+
+<br/>
+
