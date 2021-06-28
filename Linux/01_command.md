@@ -141,7 +141,7 @@ gzip -d test122 xxxx.gz
 
 # 網路功能
 ## ifconfig
-查詢目前系統網路狀況
+查詢目前系統網路狀況，若不行使用則用`ip addr`
 ```sh
 ifconfig
 ```
