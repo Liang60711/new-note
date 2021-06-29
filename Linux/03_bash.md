@@ -105,7 +105,7 @@ mkdir -pv /tmp/mysysroot/{bin,sbin,etc/sysconfig/network-scripts,usr/{bin,sbin,l
 ```
 
 ## 命令執行結果狀態碼
-可使用 `$?` 來回報上一個命令的結果:
+可使用 `echo $?` 來回報上一個命令的結果:
 * 成功: 0
 * 失敗: 1-255
 
@@ -139,7 +139,7 @@ mkdir $(date +%H:%M:%S)
 * `ctrl+e`: 跳至命令行字尾
 * `ctrl+u`: 刪除命令行字首到游標處
 * `ctrl+k`: 刪除命令行游標處到字尾
-* `ctrl+l`: 同命令 `clear`
+* `ctrl+l`: 同命令 `clear`，但不會刪除先前頁面
 
 
 ## 一次操作多個檔案

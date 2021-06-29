@@ -1,4 +1,5 @@
 # 檔案類型
+
 ## 概念/規則
 1. 嚴格區分大小寫。
 2. 目錄也是檔案 (文件)。
@@ -91,14 +92,8 @@ stat FILE
 <br/>
 
 
-# 指令(命令)
-## 指令類型 
-* 使用 `type COMMAND`查看為哪種命令
-* 內部命令: 顯示 built-in；shell 自帶的命令。
-* 外部命令: 顯示命令路徑。
-    * 命令可以有別名，別名可以與原名相同，此時原名被隱藏；如 `ls` 為 `ls --color=auto` 的原名。
-    * 如果要使用原名使用 `\ls`
-    * 查看/定義別名使用 `alias`；只對當前 shell 有效。
+# 查看類指令
+
 ## basename
 查詢 basename
 ```sh
@@ -250,42 +245,12 @@ touch -c /tmp/hello
 ```
 
 
+<br/>
 
-## alias unalias
-查看/定義別名；僅對當前 shell 有效
-```sh
-# 查看
-alias
-
-# 定義
-alias NAME="COMMAND"    # alias cls="clear"
-
-# 刪除別名
-unalias NAME            # unalias cls
-```
+<br/>
 
 
-## w 類指令
-```sh
-# 查找命令執行檔路徑
-which COMMAND
-
-
-# 查找與命令同名的所有檔案(使用手冊檔案、二進制檔案)
-whereis COMMAND
-# -b 僅顯示二進制檔案路徑
-# -m 僅顯示使用手冊檔案路徑
-
-
-# 查找登入用戶
-who
-# -b --boot 系統啟動時間
-# -r --runlevel 運行級別
-
-
-# 同 who，多了檢視時間 
-w
-```
+# 目錄檔案相關指令
 
 ## tree
 查看檔案樹狀結構
@@ -378,31 +343,64 @@ ln -s /usr/bin bin      # -s 為建立 symbolic 連結
 ```
 
 ## find 
-搜尋檔案，可以指定範圍。  
+可搜尋整個文件目錄的**檔案**，預設從根目錄開始搜尋，功能強大但速度慢，可以指定範圍。  
 `find <路徑> -name <檔名>`
 ```sh
 find / -name bin        # 在跟目錄中尋找名稱為 bin 的檔案
 ```
+搭配 globbing
+```sh
+# 當前目錄查找 my 開頭檔案
+find . -name "my*"
+```
+
 
 ## whereis
-搜尋檔案，利用曾經找過的系統內的資訊找檔案，速度較快，找不到並不代表不存在。
+搜尋所有**檔案**或**指令**，利用曾經找過的系統內的資訊找檔案，速度較快，找不到並不代表不存在。
 ```sh
-whereis bin
+# 檔案
+whereis FILE
+
+# 指令(指令也是檔案)
+whereis COMMAND
+
+# -b 查找二進制檔案
 ```
 
-## df (disk free)
-查看硬碟空間
+## which
+找的是**可執行**的**檔案**(指令就是可執行的檔案)，指令基本都在`$PATH`中搜尋，查找範圍最小，速度最快，預設只會返回第一個找到的路徑。
 ```sh
-df
+# 
+which COMMAND
+
+# 找所有不只第一筆
+which -a COMMAND
 ```
 
-## du (disk usage)
-查看目錄內所有檔案使用的硬碟空間
-```sh
-du
 
-# -h --human-readable 更換單位
-# -m --megabytes 以 MB 為單位
+<br/>
+
+<br/>
+
+# 壓縮檔案指令
+## compress
+將檔案壓縮成副檔名為 .Z 的檔案
+```sh
+compress test123                # 壓縮檔案名 test123.Z
+```
+自訂壓縮檔案名稱
+```sh
+compress test123 -d xxxx.Z      # 壓縮檔案名 xxxx.Z
+```
+
+## gzip
+同上，壓縮成副檔名為 .gz 
+```sh
+gzip test123
+```
+自訂壓縮檔案名稱
+```sh
+gzip -d test122 xxxx.gz
 ```
 
 <br/>

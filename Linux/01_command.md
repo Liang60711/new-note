@@ -1,4 +1,87 @@
-# 系統管理
+# 快捷鍵
+## 使用上一個參數 
+`ESC` 再按  `.` 
+
+## 使用上一個指令
+```sh
+# 使用上一個指令
+!$
+
+# 使用上一個 d 開頭的指令
+!d  
+```
+
+## 移動命令行游標
+* 移到最前面: `Ctrl` + `a`
+* 移到最後面: `Ctrl` + `e`
+
+## 刪除命令行文字
+* 刪掉游標前所有文字: `Ctrl` + `u`
+* 刪掉游標後所有文字: `Ctrl` + `k`
+
+## 查看上一個指令執行結果狀態碼
+使用 `echo $?`
+* 成功: 0
+* 失敗: 1-255
+
+<br>
+
+<br/>
+
+# 系統管理指令
+
+## hostname
+查看主機名稱
+```sh
+hostname
+```
+
+## df (disk free)
+查看硬碟空間
+```sh
+df
+```
+
+## du (disk usage)
+查看目錄內所有檔案使用的硬碟空間
+```sh
+du
+
+# -h --human-readable 更換單位
+# -m --megabytes 以 MB 為單位
+```
+
+
+## free 
+查看記憶體狀態
+```sh
+free
+```
+
+## top
+查看目前系統服務項目 (類似 windows 工作管理員)，ctrl + c 離開
+```sh
+top
+```
+
+## who
+查看系統上的使用者。  
+`who` 和 ` w` 功能基本相同，`who` 僅列出 user 和 登入時間。
+```sh
+who
+# -b --boot 系統啟動時間
+# -r --runlevel 運行級別
+
+
+# 同 who，多了檢視時間 
+w
+```
+
+## tty
+查看目前終端設備
+```sh
+tty
+```
 
 ## shutdown
 會將系統服務關閉後才關機，比`poweroff`和`halt`安全。
@@ -33,17 +116,6 @@ poweroff
 reboot
 ```
 
-## tty
-查看目前終端設備
-```sh
-tty
-```
-
-## type
-顯示命令類型
-```sh
-type su
-```
 
 ## su
 進入 super user 模式，需要輸入 root 密碼。
@@ -70,15 +142,7 @@ exit
 passwd
 ```
 
-## who
-查看系統上的使用者。  
-`who` 和 ` w` 功能基本相同，`who` 僅列出 user 和 登入時間。
-```sh
-who
-```
-```sh
-w
-```
+
 ## useradd
 
 ```sh
@@ -98,48 +162,14 @@ useradd -s /bin/tcsh [username]
 tail -1 /etc/passwd
 ```
 
-## top
-查看目前系統服務項目 (類似 windows 工作管理員)，ctrl + c 離開
-```sh
-top
-```
-
-## free 
-查看記憶體狀態
-```sh
-free
-```
 
 <br/>
 
 <br/>
 
-# 壓縮檔案指令
-## compress
-將檔案壓縮成副檔名為 .Z 的檔案
-```sh
-compress test123                # 壓縮檔案名 test123.Z
-```
-自訂壓縮檔案名稱
-```sh
-compress test123 -d xxxx.Z      # 壓縮檔案名 xxxx.Z
-```
 
-## gzip
-同上，壓縮成副檔名為 .gz 
-```sh
-gzip test123
-```
-自訂壓縮檔案名稱
-```sh
-gzip -d test122 xxxx.gz
-```
+# 網路功能指令
 
-<br/>
-
-<br/>
-
-# 網路功能
 ## ifconfig
 查詢目前系統網路狀況，若不行使用則用`ip addr`
 ```sh
@@ -156,12 +186,6 @@ route
 查詢網路狀況
 ```sh
 netstat
-```
-
-## hostname
-查看主機名稱
-```sh
-hostname
 ```
 
 ## ping
@@ -280,15 +304,23 @@ timedatectl set-ntp yes
 
 <br/>
 
-# 其他指令
+# "指令"相關指令
 
-## grep (global search regular expression(RE) and print out the line)
+## grep 
+global search regular expression(RE) and print out the line。  
 查詢某些特定字元，篩選出需要的資訊
 ```sh
 ps -aux|grep sendmail       # 在 ps -aux 指令中，篩選出有關鍵字 sendmail 的資訊
 
 man ls|grep later           # 篩選在 ls 手冊中有含關鍵字 later 
 ```
+
+## type
+顯示命令類型
+```sh
+type su
+```
+
 
 ## man 
 查看該指令的操作手冊，分章節:
@@ -345,6 +377,24 @@ man -aw tty
 info [command]
 ```
 
+## alias unalias
+查看/自行定義別名；僅對當前 shell 有效
+```sh
+# 查看
+alias
+
+# 定義
+alias NAME="COMMAND"    # alias cls="clear"
+
+# 刪除別名
+unalias NAME            # unalias cls
+```
+
+<br/>
+
+<br/>
+
+# 輸出指令
 
 ## echo 
 印出文本
