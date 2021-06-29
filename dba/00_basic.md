@@ -38,3 +38,10 @@ NAS 上會有許多 SCSI，但數量是有限制的，通常會用 target ID 來
 
 <br/>
 
+<br/>
+
+
+# SQL Server 服務
+開啟 service 查看服務:
+* SQL Server (MSSQLSERVER): 資料庫引擎  
+* SQL Server Agent (MSSQLSERVER): 工作排程管理
