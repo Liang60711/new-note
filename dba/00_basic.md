@@ -36,12 +36,29 @@
 ## target lun
 NAS 上會有許多 SCSI，但數量是有限制的，通常會用 target ID 來描述這些設備，設備只要一加入系統，就會有 ID。當 target ID 數量不夠時，採用 lun ID，擴充了每個 target ID，`每個 target 下都可以有多個lun `。
 
-<br/>
+## cluster
+* 指多台電腦透過某些技術或架構運作成單一系統，共同提供服務，多台電腦互相為備援，以維持伺服器與應用程式運作時間，確保服務的可用性。
+* 在叢集中我們常以節點 (Node) 來稱呼叢集主機。
+
+## ESX host 和 vMotion
+* ESX host: VMware 的 cluster。
+* vMotion: VMware 技術，將工作負載從預計發生停機的 ESX host 移轉到另一部 ESX host 上。
+
+	* 舉例: vm 所在的 ESX host 出現系統資源 (如 CPU, RAM) 短缺的問題, VMware 在偵測到這種情況之下，就有可能把這個 vm 移轉 (v-motion) 到另外一個可用的 ESX host 通常 v-motion 也可以被視為高可用性 (HA: High Availability，指系統無中斷地執行其功能的能力) 及災難復原 (DR: Disaster Recovery) 的方法之一。
+
+## VM snapshot
+虛擬主機快照，VM 虛擬主機層級的備份。
+
+## Scalability 可伸縮性、可擴展性
+* 縱向的可伸縮性: 在同一個邏輯單元內增加資源來提高處理能力。這樣的例子包括在現有伺服器上增加 CPU，或者在現有的 RAID/SAN 儲存中增加硬碟來提高儲存量。
+* 橫向的可伸縮性: 增加更多邏輯單元的資源，並令它們像是一個單元一樣工作。大多數叢集方案、分散式檔案系統、負載平衡提高橫向的可伸縮性。
+* RDBMS (一台機器跑一個服務或多個服務) 透過縱向的擴展；noSQL (多個機器跑一個服務) 則透過橫向擴展。
+
+
+
+
 
 <br/>
 
+<br/>
 
-# SQL Server 服務
-開啟 service 查看服務:
-* SQL Server (MSSQLSERVER): 資料庫引擎  
-* SQL Server Agent (MSSQLSERVER): 工作排程管理
