@@ -28,7 +28,7 @@
             * `password`: 可以是加密密碼，也可以是佔位符`x`
             * `UID`: 用戶 ID
             * `GID`: 群組 ID
-            * `GECOS`: 備註
+            * `GECOS`: 備註 comment
             * `directory`: 用戶家目錄
             * `shell`: 用戶預設 shell
 
@@ -46,7 +46,7 @@
         * 系統群組 ID: `1-999`
         * 登錄群組 ID: `1000-60000`
     
-    * 名稱解析: 轉換 groupname 和 gid `/etc/group`。
+    * 名稱解析: 轉換 GROUP_NAME 和 gid `/etc/group`。
         * 格式: `group_name:password:GID:user_list`
 
 
@@ -60,7 +60,7 @@
             * `警告期`: 密碼到期之前提醒的時間
             * `過期日期`: 可自行設定密碼過期日期
 
-    * 群駔密碼: `/etc/gshadow`。
+    * 群組密碼: `/etc/gshadow`。
 
 * [加密算法](https://github.com/Liang60711/Note/blob/67087d3e3b2b3f70313359e635eb9e1cfec77e67/Basic/0_osi.md#ssl-%E5%8D%94%E5%AE%9A):
     1. 對稱加密: plain text 加密為 cipher text。
@@ -85,3 +85,65 @@
 <br/>
 
 # 命令
+## 查看用戶、用戶組
+```sh
+# 查看用戶
+cat /etc/passwd | tail -5
+
+# 查看用戶組
+cat /etc/group | tail -5
+```
+
+
+## groupadd
+建立一個新用戶組別，`groupadd [OPTION] GROUP_NAME`
+```sh
+groupadd GROUP_NAME
+
+# -g 手動指定GID
+groupadd -g 1234 GROUP_NAME
+
+# -r 建立系統組
+groupadd -r GROUP_NAME
+```
+## groupmod
+修改用戶組別屬性，`groupmod [OPTION] GROUP_NAME`
+```sh
+# -g 修改 GID
+groupmod -g 1234 GROUP_NAME
+
+# -n 修改新祖名
+groupmod -n NEW_NAME GROUP_NAME
+```
+
+## groupdel
+刪除用戶組別
+```sh
+groupdel GROUP_NAME
+```
+
+
+
+## useradd
+建立新用戶，`useradd [OPTION] USER_NAME`  
+若用戶建立時未指定組別，則會自動建立同名的 group
+```sh
+useradd USER_NAME
+
+# -u --uid 指定用戶 UID
+useradd -u 1234 USER_NAME
+
+# -g, --gid 指定 用戶基本組ID，此組需要事先存在
+useradd -g group_01 USER_NAME
+
+# -G --groups 指定 用戶附加組ID，可多選，此組需要事先存在
+useradd -G group_02 USER_NAME
+
+# -s --shell 指定 shell種類，可選的 shell 可以在 /etc/shells 找到
+cat /etc/shells
+
+useradd -s /bin/bash USER_NAME
+
+# -r --system 建立系統用戶
+useradd -r USER_NAME
+```
