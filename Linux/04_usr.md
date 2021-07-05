@@ -147,3 +147,47 @@ useradd -s /bin/bash USER_NAME
 # -r --system 建立系統用戶
 useradd -r USER_NAME
 ```
+在建立 user 後，會自動建立一個 email 
+```sh
+ls /var/spool/mail
+```
+顯示建立用戶時的**預設設定**
+```sh
+# 查看預設值
+useradd -D
+
+# 輸出 #
+# GROUP=100
+# HOME=/home
+# INACTIVE=-1
+# EXPIRE=
+# SHELL=/bin/bash
+# SKEL=/etc/skel
+# CREATE_MAIL_SPOOL=yes
+
+
+# -D [OPTION]  將 sh 設為預設 shell
+useradd -D -s /bin/sh
+```
+
+## usermod
+修改用戶屬性
+```sh
+# -u --uid 修改用戶的 uid 
+usermod -u 1234 USER_NAME
+
+# -g --gid 修改用戶的基本組
+usermod -g NEW_GROUP USER_NAME
+
+# -G --groups 指定 用戶附加組ID，可多選，此組若事先存在(會覆蓋)
+usermod -G GROUP_01, GROUP_02 USER_NAME
+
+# -a --append 與-G一同使用，用戶追加新的附加組(不會覆蓋)
+usermod -a -G GROUP_03 USER_NAME
+
+# -d --home 修改用戶的家目錄，用戶原本在家目錄的文件不會被轉移至新位置
+usermod -d /tmp USER_NAME
+
+# -m --move-home 與-d一同使用，修改用戶的家目錄，並將所屬文件一同轉移至新位置
+usermode -m -d /tmp USER_NAME
+```
