@@ -65,7 +65,8 @@ docker container prune
 
 <br/>
 
-## 查看 container 紀錄
+## 查看 container log 紀錄
+`docker container logs` 查看 container 紀錄
 ```sh
 docker container logs <container name>
 ```
@@ -73,20 +74,27 @@ docker container logs <container name>
 
 <br/>
 
-## docker run
-建立 container
+## 啟動 container
+`docker run` 建立 container
 ```sh
-# --detach 在背景中執行
+# --detach, -d 在背景中執行
 # --name <NAME>  自訂 container 名稱
-# --publish <localhost port: container port>   指定 port 號 
+# --publish, -p <localhost port: container port>   指定 port 號 
 
 docker run --publish 8080:80 --detach --name website nginx
 ```
 
+<br/>
+
+## 顯示執行中的 container
+```sh
+docker container top <container name>
+```
 
 <br/>
 
-## docker stop
+## 停止 container
+`docker stop`
 ```sh
 # container id 可以打開頭前幾位即可
 docker stop container <container id>
@@ -94,6 +102,11 @@ docker stop container <container id>
 
 <br/>
 
+<br/>
+
+<br/>
+
+# 系統指令
 ## 查看當前佔用 port 
 ```sh
 lsof -i -n | grap LISTEN
@@ -101,8 +114,10 @@ lsof -i -n | grap LISTEN
 
 <br/>
 
-
-
+## 查看當前執行中 process 
+```sh
+ps aux
+```
 
 
 
