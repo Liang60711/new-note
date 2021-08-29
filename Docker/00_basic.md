@@ -1,3 +1,22 @@
+# 安裝環境及設定
+## 在 zsh 上安裝 docker auto-completion
+```sh
+# 1. 有安裝 on-my-zsh
+vim ~/.zshrc
+
+# 2. 將 plugins 中加入後，會自動下載外掛
+plugins = (... docker docker-compose)
+
+# 3. 存擋後重啟 zsh 設定
+source ~/.zshrc
+```
+
+
+ <br/>
+
+ <br/>
+ 
+ 
  # Docker 指令格式
 新格式: `docker <command> <sub-command> [options]`  
 舊格式(still works): `docker <command> [options]`
@@ -51,6 +70,34 @@ docker ps
 
 <br/>
 
+
+## 查看 container 指令
+`docker container logs` 查看 container logs 紀錄
+```sh
+docker container logs <container name>
+```
+
+`docker container top` 查看正在執行的 process (一個 container 可能有多個 process)
+```sh
+docker container top <container name>
+```
+
+`docker container inspect` 查看 container 的 config 檔案
+```sh
+docker container inspect <container name>
+```
+
+`docker container stats` 查看 (檢控模式) container(s) 資源使用統計，類似工作管理員
+
+
+```sh
+docker container stats
+```
+<br/>
+
+
+<br/>
+
 ## 刪除 container 
 container 停止時，不會自動刪除，需手動進行刪除
 ```sh
@@ -65,14 +112,6 @@ docker container prune
 
 <br/>
 
-## 查看 container log 紀錄
-`docker container logs` 查看 container 紀錄
-```sh
-docker container logs <container name>
-```
-
-
-<br/>
 
 ## 啟動 container
 `docker run` 建立 container
@@ -83,15 +122,19 @@ docker container logs <container name>
 
 docker run --publish 8080:80 --detach --name website nginx
 ```
-
-<br/>
-
-## 顯示執行中的 container
+若有兩個 container 同時執行，不會 conflict，因為 container 不同，但 localhost 的 port 就不能重複。 
 ```sh
-docker container top <container name>
+# host 的 8080 port redirect 到 container_1 的 80 port;
+docker container run -d -p 8080:80 nginx
+
+# host 的 80 port redirect 到 container_2 的 80 port;
+docker container run -d -p 80:80 httpd
 ```
 
+
+
 <br/>
+
 
 ## 停止 container
 `docker stop`
