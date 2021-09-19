@@ -131,6 +131,55 @@ docker container run -d -p 8080:80 nginx
 docker container run -d -p 80:80 httpd
 ```
 
+<br/>
+
+<br/>
+
+## 建立一個新的 container 並執行命令
+`docker container run -it <container> <shell>`
+
+觀念：
+* 指令會建立一個新的 container，並建立一個有 root 權限的 shell 命令行，可以選擇使用什麼 shell (bash, zsh...)。
+* 上述有個前提，此 container 中必須要安裝該 shell，或是另外安裝，否則會報錯。
+
+* 若離開此 container 命令行，此 container 則會關閉，必須再 `start`。
+
+```sh
+# -i, --interactive 可以繼續input
+# -t, --tty 使用 pseudo-TTY
+
+docker container run -it nginx bash
+```
+舉例：可以在 ubuntu 中安裝 curl。但只限定此 container 中。
+```sh
+#1 ubuntu 預設 bash 所以不用輸入 bash
+docker container run -it ubuntu
+
+#2 安裝套件
+apt-get install curl
+```
+離開 container 命令行，container 也會關閉。
+```sh
+exit
+```
+若想要再次開啟此 container 執行命令。使用 `start`
+```sh
+docker container start -ai ubuntu
+```
+
+
+<br/>
+
+## 對正在執行(run)中的 container 執行命令
+* 例如對 mysql, nginx 等正在執行中的 container 進行 troubleshooting。
+* 命令行關閉後，container 還是會處於執行狀態。
+
+`docker container exec <container> <shell>`
+```sh
+# alpine 為容量最小的 os，只支援 sh
+
+docker container exec -it alpine sh
+```
 
 
 <br/>
