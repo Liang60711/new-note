@@ -123,6 +123,9 @@ docker container prune
 docker run --publish 8080:80 --detach --name website nginx
 ```
 若有兩個 container 同時執行，不會 conflict，因為 container 不同，但 localhost 的 port 就不能重複。 
+
+當封包傳送到 localhost:8080 時，會傳遞給 container 的 80 port，代表一台主機可以有很多 nginx，並在各自的 container 中使用 80 port。
+
 ```sh
 # host 的 8080 port redirect 到 container_1 的 80 port;
 docker container run -d -p 8080:80 nginx
