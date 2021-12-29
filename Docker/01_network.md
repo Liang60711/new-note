@@ -76,6 +76,25 @@ docker container run -d --name new_nginx --network my_local_network nginx
 docker network disconnect
 ```
 
-```sh
 
+</br>
+
+</br>
+
+## 練習
+新建立一個 bridge network，在此新建立兩個 nginx1 nginx2，並使用 nginx1 ping nginx2
+```sh
+#1 建立 network
+docker network create -d bridge my_network
+
+#2 建立 container 
+docker container run -d --name nginx1 --network my_network nginx:alpine
+docker container run -d --name nginx2 --network my_network nginx:alpine
+
+#3 檢查
+docker container ls
+docker network inspect my_network
+
+#4 執行 CLI
+docker container exec -it nginx1 ping nginx2
 ```
