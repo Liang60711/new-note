@@ -16,7 +16,15 @@
     ```sh
     redis-cli
     ```
-4. 安裝browser：`Anthor Redis Desktop Manager`
+
+4. 關閉 server
+
+    ```sh
+    # mac
+    redis-cli shutdown
+    ```
+
+5. 安裝browser：`Anthor Redis Desktop Manager`
     
     ```sh
     brew install --cask another-redis-desktop-manager
@@ -31,7 +39,7 @@
     >> get foo
     ```
 
-5. 下載 phpredis API
+6. 下載 phpredis API
 
     ```sh
     # 支援 php5.6 的最高版本，若是php>=7可以使用其他安裝方式
