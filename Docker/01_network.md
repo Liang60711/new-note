@@ -98,3 +98,14 @@ docker network inspect my_network
 #4 執行 CLI
 docker container exec -it nginx1 ping nginx2
 ```
+
+<br/>
+
+<br/>
+
+# container 相互連接
+`--link` Add link to another container；其實用 `docker-compose` 更簡單
+```sh
+# --link [container_name] [container]
+docker container run -it --name my_nginx --link: db_01 mysql nginx
+```
