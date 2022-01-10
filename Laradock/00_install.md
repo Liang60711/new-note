@@ -35,6 +35,12 @@ cp .env.example .env
 ```sh
 # 將此路徑設定為 laradock workspace 的根目錄
 APP_CODE_PATH_HOST=../project-z/
+
+# 在 docker (linux) 中的 workspace 目錄
+APP_CODE_PATH_CONTAINER=/var/www
+
+# 資料庫儲存資料的目錄
+DATA_PATH_HOST=~/.laradock/data
 ```
 
 5. run container
@@ -46,6 +52,29 @@ docker-compose up -d nginx mysql
 6. 在 workspace 內使用 bash
 ```
 docker-compose exec workspace bash
+```
+
+7. `.env` 環境設置
+```sh
+### laradock .env 
+### MYSQL #################################################
+DB_HOST=mysql
+MYSQL_VERSION=8.0
+MYSQL_DATABASE=default
+MYSQL_USER=root
+MYSQL_PASSWORD=
+MYSQL_PORT=3306
+MYSQL_ROOT_PASSWORD=root
+MYSQL_ENTRYPOINT_INITDB=./mysql/docker-entrypoint-initdb.d
+
+
+### laravel project .env
+DB_CONNECTION=mysql
+DB_HOST=mysql
+DB_PORT=3306
+DB_DATABASE=default
+DB_USERNAME=root
+DB_PASSWORD=root
 ```
 
 <br/>
