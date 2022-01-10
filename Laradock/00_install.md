@@ -74,6 +74,17 @@ docker-compose up -d nginx mysql
 
 <br/>
 
+# mysql 若無法在 M1 使用
+在 `docker-compose.yml` 新增
+```yml
+image: mysql:8.0.19
+platform: 'linux/x86_64'
+```
+
+<br/>
+
+<br/>
+
 # 將 mysql 切換成 mariadb
 mysql 當前無法使用在 M1 上，需要更換成 mariadb，需修改 `.env`
 ```sh 
