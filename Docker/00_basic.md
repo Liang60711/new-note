@@ -25,7 +25,7 @@ source ~/.zshrc
 
 <br/>
 
-## Docker 各種 command 用途
+## Docker 各種 command 用途
 https://miro.medium.com/max/4800/1*DkIQGsv9YsPgB0dQpIfikA.png
 
 <br/>
@@ -139,7 +139,7 @@ docker container run -d -p 80:80 httpd
 <br/>
 
 ## 建立一個新的 container 並執行命令
-`docker container run -it <container> <shell>`
+`docker container run --rm -it <container> <shell>`
 
 觀念：
 * 指令會建立一個新的 container，並建立一個有 root 權限的 shell 命令行，可以選擇使用什麼 shell (bash, zsh...)。
@@ -150,6 +150,7 @@ docker container run -d -p 80:80 httpd
 ```sh
 # -i, --interactive 可以繼續input
 # -t, --tty 使用 pseudo-TTY
+# --rm 關閉container後，刪除該container
 
 docker container run -it nginx bash
 ```
