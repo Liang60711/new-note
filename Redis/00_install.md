@@ -22,6 +22,8 @@
     ```sh
     # mac
     redis-cli shutdown
+    # windows
+    redis-server --service-stop
     ```
 
 5. 安裝browser：`Anthor Redis Desktop Manager`
